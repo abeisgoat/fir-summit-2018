@@ -1,0 +1,233 @@
+$color-orange: #ef6c00;
+$minute-to-pixel: 1.65;
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+  padding: 0px;
+  margin: 0px;
+  font-size: 24px;
+  color: black;
+}
+
+header {
+  background-color: #2e3949;
+  text-align: center;
+  height: 100px;
+
+  .logo {
+    width: 80px;
+    padding: 20px;
+  }
+
+}
+
+.options {
+  max-width: 600px;
+  margin: 0 auto;
+
+  border-bottom: 1px solid #eee;
+  overflow: auto;
+  text-align: center;
+
+  .option {
+    font-size: 0.6em;
+    background-color: #ccc;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 10px 10px 10px 0px;
+    cursor: pointer;
+    opacity: 0.5;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
+
+.calendar {
+  max-width: 600px;
+  margin: 10px auto 80px auto;
+  position: relative;
+
+  .time {
+    width: 100%;
+    font-size: 0.6em;
+
+    display: grid;
+    grid-template-columns: fit-content(100%) 1fr;
+    .title {
+      padding-right: 5px;
+      color: #aaa;
+    }
+
+    .events {
+      @extend .sixty-minutes;
+      position: relative;
+      //border-bottom: 1px solid #ddd;
+      //margin-bottom: 5px;
+
+      .none-after, .thirty-after {
+        position: absolute;
+        width: 100%;
+        display: grid;
+        grid-column-gap: 5px;
+        grid-template-columns: repeat(auto-fit, minmax(0px, 1fr));
+      }
+
+      .none-after {
+        top: 0px;
+      }
+
+      .thirty-after {
+        top: (30px * $minute-to-pixel);
+      }
+    }
+
+    .event {
+      padding-bottom: 5px;
+      .entry {
+        color: black;
+        font-size: 0.9em;
+        background-color: white;
+        border: 1px solid black;
+        padding: 0px 5px;
+        //margin-bottom: 5px;
+        margin-left: 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+
+        .name {
+          font-size: 1.1em;
+        }
+
+        .details {
+          opacity: 0.8;
+        }
+
+        &.inactive {
+          text-decoration: line-through;
+          opacity: 0.5;
+        }
+
+        &.orange {
+          color: $color-orange;
+          border-color: $color-orange;
+
+          &.active {
+            color: white;
+            background-color: $color-orange;
+          }
+        }
+
+        &.purple {
+          color: #d81b60;
+          border-color: #d81b60;
+
+          &.active {
+            color: white;
+            background-color: #d81b60;
+          }
+        }
+
+         &.blue {
+           color: #039BE5;
+           border-color: #039BE5;
+
+           &.active {
+             color: white;
+             background-color: #039BE5;
+           }
+         }
+
+        &.green {
+          color: #0a8043;
+          border-color: #0a8043;
+
+          &.active {
+            color: white;
+            background-color: #0a8043;
+          }
+        }
+
+        &.lavender {
+          color: #7986CB;
+          border-color: #7986CB;
+
+          &.active {
+            color: white;
+            background-color: #7986CB;
+          }
+        }
+      }
+
+      &.invisible {
+        opacity: 0;
+      }
+    }
+
+    .thirty-minutes {
+      height: (30px * $minute-to-pixel);
+    }
+
+    .sixty-minutes {
+      height: (60px * $minute-to-pixel);
+    }
+
+    .ninety-minutes {
+      height: (90px * $minute-to-pixel);
+    }
+  }
+}
+
+.experts {
+  width: 400px;
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  margin-left: -200px;
+  background-color: #fff;
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+  padding: 15px 20px 20px 20px;
+  font-size: 0.7em;
+  display: grid;
+  grid-template-areas: "title title"
+                       "image details";
+
+  .title {
+    grid-area: title;
+    font-size: 1em;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  img {
+    width: 75px;
+    border-radius: 100%;
+    grid-area: image;
+  }
+
+  .details {
+    grid-area: details;
+    margin-left: 15px;
+    font-size: 0.8em;
+  }
+
+  a {
+    display: block;
+    float: right;
+  }
+}
